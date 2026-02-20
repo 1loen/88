@@ -1813,7 +1813,8 @@
                             <!-- Lessons will be rendered here -->
                         </div>
                         <div class="pagination">
-                            <span class="pagination-info">Displaying items <span id="displayRange">1-6</span> of <span id="totalItems">0</span> in total</span>
+                            <span class="pagination-info">Displaying items <span id="displayRange">1-6</span> of <span
+                                    id="totalItems">0</span> in total</span>
                             <button class="pagination-btn disabled" id="prevPage">
                                 <i class="fas fa-chevron-left"></i>
                             </button>
@@ -1833,8 +1834,8 @@
                     </div>
 
                     <textarea id="userInput"
-                        placeholder="Enter your English translation here... (Only highlighted sentence)"
-                        disabled style="display: none;"></textarea>
+                        placeholder="Enter your English translation here... (Only highlighted sentence)" disabled
+                        style="display: none;"></textarea>
 
                     <div class="controls" id="practiceControls" style="display: none;">
                         <button id="btnPrevious" class="btn-check"
@@ -1863,7 +1864,8 @@
                     </div>
 
                     <!-- Progress inline -->
-                    <div id="practiceProgress" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color); display: none;">
+                    <div id="practiceProgress"
+                        style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color); display: none;">
                         <div
                             style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                             <div style="color: var(--text-secondary); font-size: 0.9rem;">
@@ -2168,7 +2170,7 @@
             // Page numbers
             const pageNumbersContainer = document.getElementById('pageNumbers');
             let pageButtons = '';
-            
+
             for (let i = 1; i <= Math.min(5, totalPages); i++) {
                 if (i === currentPage) {
                     pageButtons += `<button class="pagination-btn active">${i}</button>`;
@@ -2176,7 +2178,7 @@
                     pageButtons += `<button class="pagination-btn" onclick="goToPage(${i})">${i}</button>`;
                 }
             }
-            
+
             if (totalPages > 5) {
                 pageButtons += `<span style="color: var(--text-secondary); padding: 0 8px;">...</span>`;
                 pageButtons += `<button class="pagination-btn" onclick="goToPage(${totalPages})">${totalPages}</button>`;
@@ -2187,7 +2189,7 @@
             // Prev/Next buttons
             const prevBtn = document.getElementById('prevPage');
             const nextBtn = document.getElementById('nextPage');
-            
+
             if (currentPage === 1) {
                 prevBtn.classList.add('disabled');
                 prevBtn.onclick = null;
@@ -2219,7 +2221,7 @@
                     if (selectedTopic === 'all') {
                         filteredLessons = [...LESSON_DATABASE];
                     } else {
-                        filteredLessons = LESSON_DATABASE.filter(lesson => 
+                        filteredLessons = LESSON_DATABASE.filter(lesson =>
                             lesson.filterTopic === selectedTopic
                         );
                     }
@@ -2252,7 +2254,7 @@
             document.getElementById('lessonMenuContainer').style.display = 'none';
             document.getElementById('storyContainer').style.display = 'block';
             document.getElementById('btnBackToMenu').style.display = 'inline-flex';
-            
+
             // Show practice elements
             document.getElementById('userInput').style.display = 'block';
             document.getElementById('practiceControls').style.display = 'flex';
@@ -2266,12 +2268,12 @@
             document.getElementById('lessonMenuContainer').style.display = 'block';
             document.getElementById('storyContainer').style.display = 'none';
             document.getElementById('btnBackToMenu').style.display = 'none';
-            
+
             // Hide practice elements
             document.getElementById('userInput').style.display = 'none';
             document.getElementById('practiceControls').style.display = 'none';
             document.getElementById('practiceProgress').style.display = 'none';
-            
+
             // Reset practice area
             storyData = [];
             currentIndex = 0;
@@ -2430,14 +2432,14 @@
             document.getElementById('btnBack').style.display = 'flex';
             document.getElementById('btnStartOver').style.display = 'flex';
             document.getElementById('btnRetry').style.display = 'flex';
-            
+
             // Chỉ hiện nút Next nếu đúng
             if (isCorrect) {
                 document.getElementById('btnNext').style.display = 'flex';
             } else {
                 document.getElementById('btnNext').style.display = 'none';
             }
-            
+
             document.getElementById('userInput').disabled = true;
         };
 
@@ -2496,8 +2498,15 @@
                 currentIndex++;
                 renderStoryUI();
             } else {
-                alert("🎉 CONGRATULATIONS!");
+                currentIndex++;
+                renderStoryUI();
                 document.getElementById('progressFill').style.width = '100%';
+
+                // Disable input and hide check button
+                const userInput = document.getElementById('userInput');
+                userInput.disabled = true;
+                userInput.placeholder = "🎉 Lesson Completed!";
+                document.getElementById('btnCheck').style.display = 'none';
             }
         };
 
