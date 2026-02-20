@@ -1,0 +1,2510 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Loen</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-body: #0a0e1a;
+            --bg-panel: #1a1f2e;
+            --bg-secondary: #141824;
+            --bg-hover: #1e2437;
+            --text-primary: #e8eaed;
+            --text-secondary: #9aa0a6;
+            --text-highlight: #a78bfa;
+            --text-done: #34d399;
+            --accent-yellow: #f59e0b;
+            --accent-blue: #60a5fa;
+            --accent-pink: #f472b6;
+            --accent-green: #34d399;
+            --border-color: #2a2f3e;
+            --error-color: #ef4444;
+            --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.3);
+            --shadow-md: 0 4px 12px 0 rgb(0 0 0 / 0.4);
+            --shadow-lg: 0 10px 40px 0 rgb(0 0 0 / 0.5);
+            --shadow-glow: 0 0 20px rgba(167, 139, 250, 0.3);
+            --gradient-purple: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-green: linear-gradient(135deg, #34d399 0%, #059669 100%);
+            --gradient-gold: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --gradient-pink: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0e1a;
+            color: var(--text-primary);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60px 70px, rgba(255, 255, 255, 0.2), transparent),
+                radial-gradient(1px 1px at 50px 50px, rgba(255, 255, 255, 0.4), transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 90px 10px, rgba(255, 255, 255, 0.2), transparent);
+            background-size: 200px 200px;
+            animation: stars 60s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes stars {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-200px);
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ==================== TOP NAV ==================== */
+        .top-nav {
+            background: var(--bg-panel);
+            border-radius: 20px;
+            padding: 16px 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 16px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: var(--gradient-purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-right: auto;
+        }
+
+        .logo i {
+            background: var(--gradient-purple);
+            padding: 10px;
+            border-radius: 12px;
+            color: white;
+            -webkit-text-fill-color: white;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .user-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 3px solid var(--text-highlight);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text-primary);
+        }
+
+        .user-stats {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-purple);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-hover);
+        }
+
+        .btn-danger {
+            background: var(--error-color);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* ==================== TABS ==================== */
+        .tabs {
+            background: var(--bg-panel);
+            border-radius: 16px;
+            padding: 8px;
+            display: inline-flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .tab {
+            padding: 12px 24px;
+            border-radius: 10px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .tab.active {
+            background: var(--gradient-purple);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tab:not(.active):hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .tab.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* ==================== MAIN LAYOUT ==================== */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: var(--bg-panel);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .panel-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* ==================== PRACTICE TAB ==================== */
+        .paste-area {
+            width: 100%;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            border-radius: 10px;
+            min-height: 100px;
+            resize: vertical;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            margin-bottom: 16px;
+        }
+
+        .paste-area:focus {
+            outline: none;
+            border-color: var(--text-highlight);
+            box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.1);
+        }
+
+        .story-content {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            min-height: 120px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .sentence {
+            transition: all 0.3s ease;
+            padding: 0;
+            border-radius: 6px;
+            display: inline;
+        }
+
+        .sentence.pending {
+            color: var(--text-secondary);
+            opacity: 0.5;
+        }
+
+        .sentence.active {
+            color: #ff6b9d;
+            font-weight: 600;
+            background: transparent;
+            padding: 0;
+            border-radius: 6px;
+        }
+
+        .sentence.done {
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        textarea {
+            width: 100%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            min-height: 100px;
+            resize: none;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            margin-bottom: 14px;
+        }
+
+        #userInput {
+            border: 2px solid var(--accent-yellow);
+            border-radius: 12px;
+            min-height: 120px;
+        }
+
+        #userInput:focus {
+            outline: none;
+            border-color: var(--accent-yellow);
+            box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--text-highlight);
+            box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.1);
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-check {
+            flex: 1;
+            background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+            color: #d1d5db;
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            font-size: 0.9rem;
+        }
+
+        .btn-check:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-retry {
+            background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+            color: #e5e7eb;
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+            color: #e5e7eb;
+        }
+
+        .btn-back {
+            background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+            color: #e5e7eb;
+        }
+
+        .btn-start-over {
+            background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+            color: #e5e7eb;
+        }
+
+        /* ==================== SIDEBAR ==================== */
+        .progress-card {
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 14px;
+            margin-bottom: 16px;
+        }
+
+        .progress-bar {
+            height: 14px;
+            background: var(--bg-panel);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 16px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-purple);
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .step-counter {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .feedback-card {
+            background: var(--bg-secondary);
+            padding: 24px;
+            border-radius: 14px;
+        }
+
+        .answer-box {
+            background: rgba(96, 165, 250, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 12px;
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        .answer-text {
+            font-weight: 600;
+            color: var(--accent-blue);
+            font-size: 1.05rem;
+        }
+
+        /* ==================== LEADERBOARD ==================== */
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .leaderboard-item:hover {
+            background: var(--bg-hover);
+            border-color: var(--border-color);
+            transform: translateX(4px);
+        }
+
+        .rank {
+            min-width: 64px;
+            height: 44px;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+            padding: 0 8px;
+        }
+
+        .rank-1 {
+            background: var(--gradient-gold);
+            color: #1f2937;
+        }
+
+        .rank-2 {
+            background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
+            color: #1f2937;
+        }
+
+        .rank-3 {
+            background: linear-gradient(135deg, #fdba74 0%, #f97316 100%);
+            color: white;
+        }
+
+        .rank-other {
+            background: var(--bg-panel);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .leaderboard-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+        }
+
+        .leaderboard-info {
+            flex: 1;
+        }
+
+        .leaderboard-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .leaderboard-stats {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .leaderboard-score {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: var(--gradient-purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* ==================== NOTES ==================== */
+        .notes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .notes-list-view {
+            display: block;
+        }
+
+        .notes-editor-view {
+            display: none;
+        }
+
+        .note-item {
+            padding: 18px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--text-highlight);
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .note-item:hover {
+            background: var(--bg-hover);
+            transform: translateX(4px);
+        }
+
+        .note-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            padding-right: 40px;
+        }
+
+        .note-item-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1rem;
+            flex: 1;
+        }
+
+        .note-item-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+            white-space: nowrap;
+        }
+
+        .note-item-preview {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .note-item-menu-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .note-item-menu-btn:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+            border-color: var(--text-highlight);
+        }
+
+        .note-menu-dropdown {
+            position: absolute;
+            top: 50px;
+            right: 12px;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            z-index: 100;
+            min-width: 160px;
+            display: none;
+        }
+
+        .note-menu-dropdown.active {
+            display: block;
+            animation: fadeInUp 0.2s ease;
+        }
+
+        .note-menu-item {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            background: transparent;
+            width: 100%;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .note-menu-item:hover {
+            background: var(--bg-hover);
+        }
+
+        .note-menu-item.danger {
+            color: var(--error-color);
+        }
+
+        .note-menu-item.danger:hover {
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .notes-textarea {
+            width: 100%;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 20px;
+            border-radius: 14px;
+            font-size: 1rem;
+            min-height: 400px;
+            resize: vertical;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .notes-textarea:focus {
+            outline: none;
+            border-color: var(--text-highlight);
+            box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.15);
+        }
+
+        .notes-title-input {
+            width: 100%;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 14px 16px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            margin-bottom: 16px;
+        }
+
+        .notes-title-input:focus {
+            outline: none;
+            border-color: var(--text-highlight);
+            box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.15);
+        }
+
+        .notes-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding: 12px 16px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .char-count {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        .char-count.warning {
+            color: var(--accent-yellow);
+        }
+
+        .char-count.error {
+            color: var(--error-color);
+        }
+
+        /* ==================== EMPTY STATES ==================== */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.3;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .empty-state h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .empty-state p {
+            text-align: center;
+        }
+
+        /* ==================== LOGIN NEEDED OVERLAY ==================== */
+        .login-needed {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .login-needed i {
+            font-size: 5rem;
+            margin-bottom: 24px;
+            background: var(--gradient-purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .login-needed h3 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .login-needed p {
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+            font-size: 1.05rem;
+        }
+
+        /* ==================== MODALS ==================== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            background: var(--bg-panel);
+            padding: 48px;
+            border-radius: 24px;
+            max-width: 480px;
+            width: 90%;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-purple);
+            border-radius: 24px 24px 0 0;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-secondary);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .login-modal-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background: var(--gradient-purple);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .login-modal-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .login-modal-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            font-size: 1.05rem;
+        }
+
+        .auth-form {
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+            padding: 14px 16px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--text-highlight);
+            box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.15);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: var(--text-primary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .auth-btn {
+            flex: 1;
+            padding: 14px 24px;
+            border-radius: 12px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .auth-btn-login {
+            background: var(--gradient-purple);
+            color: white;
+        }
+
+        .auth-btn-register {
+            background: var(--gradient-green);
+            color: white;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .auth-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--error-color);
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+            display: none;
+            border-left: 4px solid var(--error-color);
+        }
+
+        .security-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            padding: 12px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .confirm-modal-content {
+            max-width: 400px;
+        }
+
+        .confirm-modal-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 20px;
+            background: rgba(239, 68, 68, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--error-color);
+        }
+
+        .confirm-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 12px;
+            }
+
+            .logo {
+                display: none;
+            }
+
+            .top-nav {
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: center;
+                padding: 10px 12px;
+            }
+
+            .practice-layout {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .user-info {
+                flex-direction: row;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .user-avatar {
+                width: 36px;
+                height: 36px;
+            }
+
+            .user-details {
+                display: none;
+            }
+
+            .nav-actions {
+                justify-content: flex-end;
+                flex-wrap: nowrap;
+                gap: 8px;
+            }
+
+            .btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+                white-space: nowrap;
+            }
+
+            .tabs {
+                width: 100%;
+                justify-content: stretch;
+                gap: 4px;
+                padding: 8px;
+            }
+
+            .tab {
+                flex: 1;
+                padding: 8px 6px;
+                font-size: 0.8rem;
+            }
+
+            .tab i {
+                display: none;
+            }
+
+            .panel {
+                padding: 14px;
+                border-radius: 10px;
+            }
+
+            .panel-title {
+                font-size: 1rem;
+                margin-bottom: 12px;
+            }
+
+            .story-content {
+                font-size: 0.95rem;
+                padding: 14px;
+                line-height: 1.6;
+            }
+
+            .sentence {
+                padding: 2px 4px;
+                font-size: 0.95rem;
+            }
+
+            textarea {
+                padding: 12px;
+                font-size: 0.9rem;
+                min-height: 80px;
+            }
+
+            .paste-area {
+                min-height: 80px;
+                font-size: 0.9rem;
+            }
+
+            .controls {
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+
+            .btn-check {
+                padding: 9px 12px;
+                font-size: 0.8rem;
+                min-width: calc(50% - 3px);
+                flex: 1 1 calc(50% - 3px);
+            }
+
+            .modal-content {
+                padding: 24px 16px;
+                width: 95%;
+                max-width: 95%;
+            }
+
+            .form-input {
+                padding: 10px 14px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Mobile - Small phones */
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+
+            .top-nav {
+                padding: 10px;
+                border-radius: 12px;
+                gap: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .logo {
+                display: none;
+            }
+
+            .nav-actions {
+                gap: 6px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                flex-wrap: nowrap;
+                width: auto;
+            }
+
+            .btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+
+            .tabs {
+                gap: 4px;
+                padding: 8px;
+                display: flex;
+                width: 100%;
+                justify-content: stretch;
+            }
+
+            .tab {
+                padding: 8px 6px;
+                font-size: 0.75rem;
+                flex: 1;
+                text-align: center;
+                white-space: nowrap;
+            }
+
+            .tab i {
+                display: none;
+            }
+
+            .panel {
+                padding: 14px;
+                border-radius: 10px;
+                width: 100%;
+            }
+
+            .panel-title {
+                font-size: 1rem;
+                margin-bottom: 12px;
+                width: 100%;
+            }
+
+            .story-content {
+                font-size: 0.8rem;
+                padding: 12px;
+                line-height: 1.6;
+                width: 100%;
+                text-align: justify;
+                word-spacing: normal;
+            }
+
+            .sentence {
+                padding: 4px 6px;
+                font-size: 0.95rem;
+                display: inline;
+                margin: 0;
+                white-space: normal;
+            }
+
+            textarea {
+                padding: 12px;
+                font-size: 0.9rem;
+                min-height: 80px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .paste-area {
+                min-height: 80px;
+                font-size: 0.9rem;
+                width: 100%;
+                padding: 12px;
+                box-sizing: border-box;
+            }
+
+            .controls {
+                flex-wrap: wrap;
+                gap: 8px;
+                display: flex;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .btn-check {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+                flex: 1 1 calc(50% - 4px);
+                min-width: calc(50% - 4px);
+                text-align: center;
+            }
+
+            .filter-group {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                width: 100%;
+            }
+
+            .filter-label {
+                font-size: 0.9rem;
+            }
+
+            .filter-select {
+                font-size: 0.9rem;
+                padding: 8px 10px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .lessons-header {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                align-items: stretch;
+            }
+
+            .lessons-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 12px;
+                width: 100%;
+            }
+
+            .lesson-card {
+                padding: 14px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .lesson-title {
+                font-size: 1rem;
+                margin-bottom: 6px;
+            }
+
+            .lesson-category {
+                font-size: 0.8rem;
+                margin-bottom: 6px;
+            }
+
+            .lesson-preview {
+                font-size: 0.85rem;
+                max-height: 70px;
+                line-height: 1.5;
+            }
+
+            .lesson-attempts {
+                font-size: 0.8rem;
+                margin-top: 8px;
+            }
+
+            .modal-content {
+                padding: 18px 14px;
+                width: 95%;
+                max-width: 95%;
+                border-radius: 12px;
+                max-height: 85vh;
+                overflow-y: auto;
+            }
+
+            .modal-header {
+                font-size: 1.1rem;
+                margin-bottom: 14px;
+                word-wrap: break-word;
+            }
+
+            .modal-body {
+                font-size: 0.9rem;
+            }
+
+            .modal-close {
+                font-size: 1.2rem;
+                padding: 4px 8px;
+            }
+
+            .word-breakdown {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 10px;
+                width: 100%;
+            }
+
+            .phrase-item {
+                padding: 10px;
+                font-size: 0.85rem;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .phrase-en {
+                font-size: 0.9rem;
+                margin-bottom: 4px;
+            }
+
+            .phrase-vi {
+                font-size: 0.85rem;
+            }
+
+            .pagination {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+                width: 100%;
+                padding: 10px 0;
+            }
+
+            .pagination-info {
+                font-size: 0.8rem;
+                text-align: center;
+                width: 100%;
+            }
+
+            #pageNumbers {
+                display: flex;
+                gap: 4px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .pagination-btn {
+                padding: 8px 10px;
+                font-size: 0.85rem;
+                min-width: 40px;
+            }
+
+            .form-input {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .practice-layout {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+                width: 100%;
+            }
+
+            .btn-back {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+
+        /* Tablet - iPad */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                padding: 16px;
+            }
+
+            .logo {
+                display: none;
+            }
+
+            .top-nav {
+                padding: 12px 20px;
+                justify-content: flex-end;
+            }
+
+            .practice-layout {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+            }
+
+            .panel {
+                padding: 18px;
+            }
+
+            .panel-title {
+                font-size: 1.15rem;
+            }
+
+            .story-content {
+                font-size: 1.05rem;
+                padding: 18px;
+            }
+
+            .sentence {
+                padding: 3px 6px;
+            }
+
+            textarea {
+                padding: 14px;
+                font-size: 0.95rem;
+            }
+
+            .btn-check {
+                padding: 10px 16px;
+                font-size: 0.88rem;
+            }
+
+            .tabs {
+                gap: 8px;
+            }
+
+            .tab {
+                padding: 10px 14px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ==================== ANIMATIONS ==================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .slide-in {
+            animation: slideIn 0.4s ease-out;
+        }
+
+        /* ==================== LESSON CARDS ==================== */
+        .lessons-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .lessons-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fbbf24;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .filter-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .filter-select {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 10px 16px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            min-width: 150px;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--text-highlight);
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .lesson-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .lesson-card:hover {
+            border-color: var(--text-highlight);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .lesson-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .lesson-card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+            flex: 1;
+        }
+
+        .lesson-badges {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: flex-end;
+        }
+
+        .badge-new {
+            background: #3b82f6;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-attempt {
+            background: #10b981;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .lesson-preview {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .lesson-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .lesson-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .lesson-meta i {
+            margin-right: 4px;
+        }
+
+        .btn-start-exercise {
+            background: #f59e0b;
+            color: #0a0e1a;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-start-exercise:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 32px;
+        }
+
+        .pagination-info {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-right: auto;
+        }
+
+        #pageNumbers {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pagination-btn {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .pagination-btn:hover {
+            border-color: var(--text-highlight);
+            background: var(--bg-hover);
+        }
+
+        .pagination-btn.active {
+            background: var(--text-highlight);
+            border-color: var(--text-highlight);
+            color: white;
+        }
+
+        .pagination-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 1024px) {
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Top Navigation -->
+        <div class="top-nav fade-in-up">
+            <!-- Guest view -->
+            <div id="guestNav" class="nav-actions">
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs fade-in-up" style="animation-delay: 0.1s;">
+            <button class="tab active" onclick="switchTab('practice')">
+                <i class="fas fa-book-open"></i> Practice
+            </button>
+            <button id="leaderboardTab" class="tab" onclick="switchTab('leaderboard')">
+                <i class="fas fa-trophy"></i> Ranking
+            </button>
+            <button id="notesTab" class="tab" onclick="switchTab('notes')">
+                <i class="fas fa-sticky-note"></i> Notes
+            </button>
+        </div>
+
+        <!-- PRACTICE TAB -->
+        <div id="practiceTab" class="fade-in-up" style="animation-delay: 0.2s; max-width: 1200px; margin: 0 auto;">
+            <div class="practice-layout" style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+                <!-- Left Column: Story and Input -->
+                <div class="panel">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                        <div class="panel-title" style="margin-bottom: 0;">
+                            <i class="fas fa-edit"></i> Practice Area
+                        </div>
+                        <button id="btnBackToMenu" class="btn btn-primary" onclick="showLessonMenu()"
+                            style="display: none;">
+                            <i class="fas fa-list"></i> Menu
+                        </button>
+                    </div>
+
+                    <!-- Lesson Menu -->
+                    <div id="lessonMenuContainer">
+                        <div class="lessons-header">
+                            <div></div>
+                            <div class="filter-group">
+                                <span class="filter-label">Filter Topic:</span>
+                                <select class="filter-select" id="topicFilter">
+                                    <option value="all">All</option>
+                                    <option value="A1 level">A1 level</option>
+                                    <option value="A2 level">A2 level</option>
+                                    <option value="B1 level">B1 level</option>
+                                    <option value="B2 level">B2 level</option>
+                                    <option value="C1 level">C1 level</option>
+                                    <option value="C2 level">C2 level</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="lessonList" class="lessons-grid">
+                            <!-- Lessons will be rendered here -->
+                        </div>
+                        <div class="pagination">
+                            <span class="pagination-info">Displaying items <span id="displayRange">1-6</span> of <span id="totalItems">0</span> in total</span>
+                            <button class="pagination-btn disabled" id="prevPage">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <div id="pageNumbers"></div>
+                            <button class="pagination-btn" id="nextPage">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="story-content" id="storyContainer" style="display: none;">
+                        <div class="empty-state">
+                            <i class="fas fa-lightbulb"></i>
+                            <h3>Ready to Learn!</h3>
+                            <p>Choose a lesson to start</p>
+                        </div>
+                    </div>
+
+                    <textarea id="userInput"
+                        placeholder="Enter your English translation here... (Only highlighted sentence)"
+                        disabled style="display: none;"></textarea>
+
+                    <div class="controls" id="practiceControls" style="display: none;">
+                        <button id="btnPrevious" class="btn-check"
+                            style="background: var(--bg-secondary); color: var(--text-primary); display:none;"
+                            onclick="previousSentence()">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </button>
+                        <button id="btnCheck" class="btn-check" onclick="checkCurrentSentence()" style="display:none;">
+                            <i class="fas fa-check-circle"></i> Check Answer
+                        </button>
+                        <button id="btnBack" class="btn-check btn-back" style="display:none;"
+                            onclick="previousSentence()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button id="btnStartOver" class="btn-check btn-start-over" style="display:none;"
+                            onclick="startOver()">
+                            <i class="fas fa-undo"></i> Start Over
+                        </button>
+                        <button id="btnRetry" class="btn-check btn-retry" onclick="retrySentence()"
+                            style="display:none;">
+                            <i class="fas fa-redo"></i> Retry
+                        </button>
+                        <button id="btnNext" class="btn-check btn-next" onclick="nextSentence()" style="display:none;">
+                            <i class="fas fa-arrow-right"></i> Continue
+                        </button>
+                    </div>
+
+                    <!-- Progress inline -->
+                    <div id="practiceProgress" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color); display: none;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                                Step <span id="currentStep">0</span> of <span id="totalSteps">0</span>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div id="progressFill" class="progress-fill" style="width:0%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Feedback -->
+                <div class="panel" id="feedbackPanel" style="display: none;">
+                    <div class="panel-title">
+                        <i class="fas fa-comments"></i> Feedback
+                    </div>
+                    <div id="feedbackCard" style="display: block;">
+                        <div id="feedbackBox">
+                            <div class="empty-state">
+                                <i class="fas fa-lightbulb"></i>
+                                <h3>Check your answer</h3>
+                                <p>Submit your translation to see feedback</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LEADERBOARD TAB -->
+        <div id="leaderboardContent" style="display: none;">
+            <div class="panel fade-in-up">
+                <div class="panel-title">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div id="leaderboardList"></div>
+            </div>
+        </div>
+
+        <!-- NOTES TAB -->
+        <div id="notesContent" style="display: none;">
+            <div class="panel fade-in-up">
+                <!-- List View -->
+                <div id="notesListView" class="notes-list-view">
+                    <div class="notes-header">
+                        <div class="panel-title" style="margin-bottom: 0;">
+                            <i class="fas fa-sticky-note"></i> My Notes
+                        </div>
+                        <button class="btn btn-primary" onclick="createNewNote()">
+                            <i class="fas fa-plus"></i> New
+                        </button>
+                    </div>
+                    <div id="notesList"></div>
+                </div>
+
+                <!-- Editor View -->
+                <div id="notesEditorView" class="notes-editor-view">
+                    <div class="notes-header">
+                        <div class="panel-title" style="margin-bottom: 0;">
+                            <i class="fas fa-edit"></i> <span id="editorTitle">New Note</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="backToNotesList()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                    </div>
+
+                    <input type="text" id="noteTitle" class="notes-title-input" placeholder="Tiêu đề ghi chú..."
+                        maxlength="100">
+
+                    <div class="notes-info">
+                        <span>
+                            <i class="fas fa-info-circle"></i>
+                            Tối đa 2000 ký tự
+                        </span>
+                        <span class="char-count" id="charCount">0 / 2000</span>
+                    </div>
+
+                    <textarea id="notesTextarea" class="notes-textarea" placeholder="✏️ Viết ghi chú của bạn tại đây..."
+                        maxlength="2000"></textarea>
+
+                    <div style="display: flex; gap: 12px;">
+                        <button class="btn btn-primary" style="flex: 1;" onclick="saveNote()">
+                            <i class="fas fa-save"></i> Lưu ghi chú
+                        </button>
+                        <button class="btn btn-secondary" onclick="backToNotesList()">
+                            <i class="fas fa-times"></i> Hủy
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="confirmModal" class="modal-overlay">
+        <div class="modal-content confirm-modal-content">
+            <button class="modal-close" onclick="closeConfirmModal()">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="confirm-modal-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+
+            <h3 style="margin-bottom: 12px; color: var(--text-primary);">Xác nhận xóa</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 24px;">
+                Bạn có chắc chắn muốn xóa ghi chú này? Hành động này không thể hoàn tác.
+            </p>
+
+            <div class="confirm-buttons">
+                <button class="btn btn-secondary" onclick="closeConfirmModal()" style="flex: 1;">
+                    <i class="fas fa-times"></i> Hủy
+                </button>
+                <button class="btn btn-danger" onclick="confirmDeleteNote()" style="flex: 1;">
+                    <i class="fas fa-trash"></i> Xóa
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+            }
+        }
+    </script>
+
+    <script type="module">
+        import { LESSON_DATABASE } from './data.js';
+
+        let storyData = [];
+        let currentIndex = 0;
+        let currentTab = 'practice';
+        let currentNoteId = null;
+        let noteToDelete = null;
+
+        // ============================================
+        // TAB SWITCHING
+        // ============================================
+        window.switchTab = async (tab) => {
+
+            currentTab = tab;
+
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.getElementById('practiceTab').style.display = 'none';
+            document.getElementById('leaderboardContent').style.display = 'none';
+            document.getElementById('notesContent').style.display = 'none';
+
+            if (tab === 'practice') {
+                document.getElementById('practiceTab').style.display = 'grid';
+            } else if (tab === 'leaderboard') {
+                document.getElementById('leaderboardContent').style.display = 'block';
+                await loadLeaderboard();
+            } else if (tab === 'notes') {
+                document.getElementById('notesContent').style.display = 'block';
+                await loadNotesList();
+            }
+        };
+
+        // ============================================
+        // LEADERBOARD
+        // ============================================
+        async function loadLeaderboard() {
+            const container = document.getElementById('leaderboardList');
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-trophy"></i>
+                    <h3>No Data Yet</h3>
+                    <p>Feature disabled</p>
+                </div>
+            `;
+        }
+
+        // ============================================
+        // NOTES
+        // ============================================
+        async function loadNotesList() {
+            const container = document.getElementById('notesList');
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-sticky-note"></i>
+                    <h3>Chưa có ghi chú nào</h3>
+                    <p>Feature disabled</p>
+                </div>
+            `;
+            document.getElementById('notesListView').style.display = 'block';
+            document.getElementById('notesEditorView').style.display = 'none';
+        }
+
+        window.createNewNote = () => {
+            currentNoteId = null;
+            document.getElementById('noteTitle').value = '';
+            document.getElementById('notesTextarea').value = '';
+            document.getElementById('editorTitle').textContent = 'New Note';
+
+            document.getElementById('notesListView').style.display = 'none';
+            document.getElementById('notesEditorView').style.display = 'block';
+
+            updateCharCount();
+        };
+
+        window.editNote = async (noteId) => {
+            // Feature disabled
+        };
+
+        window.saveNote = async () => {
+            alert('⚠️ Feature disabled');
+        };
+
+        window.backToNotesList = () => {
+            loadNotesList();
+        };
+
+        window.toggleNoteMenu = (event, noteId) => {
+            // Feature disabled
+        };
+
+        function closeAllNoteMenus(event) {
+            // Feature disabled
+        }
+
+        window.deleteNotePrompt = (noteId) => {
+            // Feature disabled
+        };
+
+        window.closeConfirmModal = () => {
+            document.getElementById('confirmModal').style.display = 'none';
+            noteToDelete = null;
+        };
+
+        window.confirmDeleteNote = async () => {
+            // Feature disabled
+        };
+
+        function updateCharCount() {
+            const textarea = document.getElementById('notesTextarea');
+            const charCount = document.getElementById('charCount');
+            const currentLength = textarea.value.length;
+
+            charCount.textContent = `${currentLength} / 2000`;
+
+            charCount.classList.remove('warning', 'error');
+            if (currentLength > 1800) {
+                charCount.classList.add('error');
+            } else if (currentLength > 1500) {
+                charCount.classList.add('warning');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const notesTextarea = document.getElementById('notesTextarea');
+            if (notesTextarea) {
+                notesTextarea.addEventListener('input', updateCharCount);
+            }
+        });
+
+        // ============================================
+        // LESSON LOADING
+        // ============================================
+        let currentPage = 1;
+        const itemsPerPage = 6;
+        let filteredLessons = [...LESSON_DATABASE];
+
+        function renderLessonMenu() {
+            const container = document.getElementById('lessonList');
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const lessonsToShow = filteredLessons.slice(start, end);
+
+            container.innerHTML = lessonsToShow.map(lesson => `
+                <div class="lesson-card">
+                    <div class="lesson-card-header">
+                        <div class="lesson-card-title">${lesson.title}</div>
+                    </div>
+                    <div class="lesson-preview">${lesson.preview}</div>
+                    <div class="lesson-card-footer">
+                        <div class="lesson-meta">
+                            <span>${lesson.category}</span>
+                        </div>
+                        <button class="btn-start-exercise" onclick="loadLesson(${lesson.id})">
+                            Start Exercise
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            updatePagination();
+        }
+
+        function updatePagination() {
+            const totalItems = filteredLessons.length;
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            const start = (currentPage - 1) * itemsPerPage + 1;
+            const end = Math.min(currentPage * itemsPerPage, totalItems);
+
+            document.getElementById('displayRange').textContent = `${start}-${end}`;
+            document.getElementById('totalItems').textContent = totalItems;
+
+            // Page numbers
+            const pageNumbersContainer = document.getElementById('pageNumbers');
+            let pageButtons = '';
+            
+            for (let i = 1; i <= Math.min(5, totalPages); i++) {
+                if (i === currentPage) {
+                    pageButtons += `<button class="pagination-btn active">${i}</button>`;
+                } else {
+                    pageButtons += `<button class="pagination-btn" onclick="goToPage(${i})">${i}</button>`;
+                }
+            }
+            
+            if (totalPages > 5) {
+                pageButtons += `<span style="color: var(--text-secondary); padding: 0 8px;">...</span>`;
+                pageButtons += `<button class="pagination-btn" onclick="goToPage(${totalPages})">${totalPages}</button>`;
+            }
+
+            pageNumbersContainer.innerHTML = pageButtons;
+
+            // Prev/Next buttons
+            const prevBtn = document.getElementById('prevPage');
+            const nextBtn = document.getElementById('nextPage');
+            
+            if (currentPage === 1) {
+                prevBtn.classList.add('disabled');
+                prevBtn.onclick = null;
+            } else {
+                prevBtn.classList.remove('disabled');
+                prevBtn.onclick = () => goToPage(currentPage - 1);
+            }
+
+            if (currentPage === totalPages) {
+                nextBtn.classList.add('disabled');
+                nextBtn.onclick = null;
+            } else {
+                nextBtn.classList.remove('disabled');
+                nextBtn.onclick = () => goToPage(currentPage + 1);
+            }
+        }
+
+        window.goToPage = (page) => {
+            currentPage = page;
+            renderLessonMenu();
+        };
+
+        // Filter by topic
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterSelect = document.getElementById('topicFilter');
+            if (filterSelect) {
+                filterSelect.addEventListener('change', (e) => {
+                    const selectedTopic = e.target.value;
+                    if (selectedTopic === 'all') {
+                        filteredLessons = [...LESSON_DATABASE];
+                    } else {
+                        filteredLessons = LESSON_DATABASE.filter(lesson => 
+                            lesson.filterTopic === selectedTopic
+                        );
+                    }
+                    currentPage = 1;
+                    renderLessonMenu();
+                });
+            }
+        });
+
+        window.loadLesson = (lessonId) => {
+            const lesson = LESSON_DATABASE.find(l => l.id === lessonId);
+            if (!lesson) {
+                alert("❌ Không tìm thấy bài học!");
+                return;
+            }
+
+            // Convert data format from {vi, en_best, phrases} to {vi, en_best, phrase_breakdown}
+            storyData = lesson.data.map(item => ({
+                vi: item.vi,
+                en_best: item.en_best,
+                phrase_breakdown: item.phrases.map(p => ({
+                    phrase: p.en,
+                    meaning: p.vi
+                }))
+            }));
+
+            currentIndex = 0;
+
+            // Hide menu, show practice area
+            document.getElementById('lessonMenuContainer').style.display = 'none';
+            document.getElementById('storyContainer').style.display = 'block';
+            document.getElementById('btnBackToMenu').style.display = 'inline-flex';
+            
+            // Show practice elements
+            document.getElementById('userInput').style.display = 'block';
+            document.getElementById('practiceControls').style.display = 'flex';
+            document.getElementById('practiceProgress').style.display = 'block';
+            document.getElementById('feedbackPanel').style.display = 'block';
+
+            renderStoryUI();
+        };
+
+        window.showLessonMenu = () => {
+            document.getElementById('lessonMenuContainer').style.display = 'block';
+            document.getElementById('storyContainer').style.display = 'none';
+            document.getElementById('btnBackToMenu').style.display = 'none';
+            
+            // Hide practice elements
+            document.getElementById('userInput').style.display = 'none';
+            document.getElementById('practiceControls').style.display = 'none';
+            document.getElementById('practiceProgress').style.display = 'none';
+            
+            // Reset practice area
+            storyData = [];
+            currentIndex = 0;
+            document.getElementById('userInput').value = '';
+            document.getElementById('userInput').disabled = true;
+            document.getElementById('btnCheck').style.display = 'none';
+            document.getElementById('btnPrevious').style.display = 'none';
+            document.getElementById('btnBack').style.display = 'none';
+            document.getElementById('btnStartOver').style.display = 'none';
+            document.getElementById('btnRetry').style.display = 'none';
+            document.getElementById('btnNext').style.display = 'none';
+            document.getElementById('feedbackBox').innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Check your answer</h3>
+                    <p>Submit your translation to see feedback</p>
+                </div>
+            `;
+        };
+
+        function renderStoryUI() {
+            const container = document.getElementById('storyContainer');
+            container.innerHTML = '';
+
+            storyData.forEach((item, index) => {
+                const span = document.createElement('span');
+                // Hiển thị tiếng Anh cho câu đã làm, tiếng Việt cho câu chưa làm
+                if (index < currentIndex) {
+                    span.innerText = item.en_best + " ";
+                } else {
+                    span.innerText = item.vi + " ";
+                }
+                span.classList.add('sentence');
+
+                if (index < currentIndex) span.classList.add('done');
+                else if (index === currentIndex) span.classList.add('active');
+                else span.classList.add('pending');
+
+                container.appendChild(span);
+            });
+
+            document.getElementById('userInput').value = '';
+            document.getElementById('userInput').disabled = false;
+            document.getElementById('userInput').focus();
+            document.getElementById('btnCheck').style.display = 'flex';
+            document.getElementById('btnBack').style.display = 'none';
+            document.getElementById('btnStartOver').style.display = 'none';
+            document.getElementById('btnRetry').style.display = 'none';
+            document.getElementById('btnNext').style.display = 'none';
+
+            // Show/hide Previous button based on current index
+            if (currentIndex > 0) {
+                document.getElementById('btnPrevious').style.display = 'flex';
+            } else {
+                document.getElementById('btnPrevious').style.display = 'none';
+            }
+
+            // Hide feedback when moving to new sentence
+            document.getElementById('feedbackBox').innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Check your answer</h3>
+                    <p>Submit your translation to see feedback</p>
+                </div>
+            `;
+
+            updateProgress();
+        }
+
+        function updateProgress() {
+            document.getElementById('currentStep').innerText = currentIndex + 1;
+            document.getElementById('totalSteps').innerText = storyData.length;
+            document.getElementById('progressFill').style.width =
+                `${(currentIndex / storyData.length) * 100}%`;
+        }
+
+        window.checkCurrentSentence = async () => {
+            const currentData = storyData[currentIndex];
+            const userAnswer = document.getElementById('userInput').value.trim();
+
+            // Chuẩn hóa để so sánh: bỏ dấu câu, chữ thường, bỏ khoảng trắng thừa
+            const normalizeText = (text) => {
+                return text.toLowerCase()
+                    .replace(/[.,!?;:]/g, '')
+                    .replace(/\s+/g, ' ')
+                    .trim();
+            };
+
+            const isCorrect = normalizeText(userAnswer) === normalizeText(currentData.en_best);
+
+            // Use phrase_breakdown from AI response
+            const phraseBreakdowns = currentData.phrase_breakdown || [];
+
+            const phrasesHTML = phraseBreakdowns.map(item => {
+                return `
+                    <div style="padding: 12px 0; border-bottom: 1px solid var(--border-color);">
+                        <div style="font-weight: 500; font-size: 1rem;">
+                            <span style="color: #34d399; font-weight: 600;">${item.phrase}</span><span style="color: var(--text-secondary);">:</span> <span style="color: #c4b5fd;">${item.meaning}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            let feedbackHTML = '';
+
+            if (isCorrect) {
+                // Đúng - hiển thị màu xanh
+                feedbackHTML = `
+                    <div>
+                        <div style="color: #34d399; font-weight: bold; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-check-circle"></i> Correct!
+                        </div>
+                        <div style="background: var(--bg-secondary); padding: 20px; border-radius: 12px; margin-bottom: 16px; border: 2px solid #34d399;">
+                            <div style="color: #34d399; font-size: 1.2rem; font-weight: 600;">
+                                ${currentData.en_best}
+                            </div>
+                        </div>
+                        <div style="color: var(--text-highlight); font-weight: bold; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-book"></i> Vocabulary:
+                        </div>
+                        <div style="background: var(--bg-secondary); padding: 20px; border-radius: 12px;">
+                            ${phrasesHTML}
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Sai - hiển thị màu đỏ và so sánh
+                feedbackHTML = `
+                    <div>
+                        <div style="color: #ef4444; font-weight: bold; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-times-circle"></i> Incorrect - Try Again
+                        </div>
+                        <div style="background: var(--bg-secondary); padding: 20px; border-radius: 12px; margin-bottom: 16px; border: 2px solid #ef4444;">
+                            <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 8px;">Your answer:</div>
+                            <div style="color: #ef4444; font-size: 1.1rem; font-weight: 600; margin-bottom: 16px;">
+                                ${userAnswer || '(empty)'}
+                            </div>
+                            <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 8px;">Correct answer:</div>
+                            <div style="color: #34d399; font-size: 1.1rem; font-weight: 600;">
+                                ${currentData.en_best}
+                            </div>
+                        </div>
+                        <div style="color: var(--text-highlight); font-weight: bold; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-book"></i> Vocabulary:
+                        </div>
+                        <div style="background: var(--bg-secondary); padding: 20px; border-radius: 12px;">
+                            ${phrasesHTML}
+                        </div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('feedbackBox').innerHTML = feedbackHTML;
+            document.getElementById('btnCheck').style.display = 'none';
+            document.getElementById('btnPrevious').style.display = 'none';
+            document.getElementById('btnBack').style.display = 'flex';
+            document.getElementById('btnStartOver').style.display = 'flex';
+            document.getElementById('btnRetry').style.display = 'flex';
+            
+            // Chỉ hiện nút Next nếu đúng
+            if (isCorrect) {
+                document.getElementById('btnNext').style.display = 'flex';
+            } else {
+                document.getElementById('btnNext').style.display = 'none';
+            }
+            
+            document.getElementById('userInput').disabled = true;
+        };
+
+        // Text-to-Speech function for phrases
+        window.speakPhrase = (phrase) => {
+            const cleanPhrase = phrase.trim();
+            const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(cleanPhrase)}&tl=en&client=tw-ob`;
+
+            const audio = document.createElement('audio');
+            audio.src = url;
+            audio.setAttribute('preload', 'auto');
+            audio.setAttribute('crossorigin', 'anonymous');
+
+            // Play khi sẵn sàng
+            audio.addEventListener('canplaythrough', () => {
+                audio.play().catch(e => console.error("Lỗi phát:", e));
+            }, { once: true });
+
+            audio.load();
+        };
+
+        window.retrySentence = () => {
+            document.getElementById('userInput').value = '';
+            document.getElementById('userInput').disabled = false;
+            document.getElementById('userInput').focus();
+            document.getElementById('btnCheck').style.display = 'flex';
+            document.getElementById('btnBack').style.display = 'none';
+            document.getElementById('btnStartOver').style.display = 'none';
+            document.getElementById('btnRetry').style.display = 'none';
+            document.getElementById('btnNext').style.display = 'none';
+
+            // Reset feedback to empty state
+            document.getElementById('feedbackBox').innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Check your answer</h3>
+                    <p>Submit your translation to see feedback</p>
+                </div>
+            `;
+        };
+
+        window.startOver = () => {
+            currentIndex = 0;
+            renderStoryUI();
+        };
+
+        window.previousSentence = () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderStoryUI();
+            }
+        };
+
+        window.nextSentence = async () => {
+            if (currentIndex < storyData.length - 1) {
+                currentIndex++;
+                renderStoryUI();
+            } else {
+                alert("🎉 CONGRATULATIONS!");
+                document.getElementById('progressFill').style.width = '100%';
+            }
+        };
+
+        window.onload = () => {
+            renderLessonMenu();
+        };
+    </script>
+</body>
+
+</html>
