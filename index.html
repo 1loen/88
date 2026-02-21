@@ -376,46 +376,47 @@
         }
 
         .btn-check {
-            flex: 1;
-            background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
-            color: #d1d5db;
-            padding: 10px 16px;
-            border-radius: 10px;
+            width: fit-content;
+            background: #1a73e8;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
             border: none;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-md);
-            font-size: 0.9rem;
+            gap: 8px;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
         }
 
         .btn-check:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+            background: #1557b0;
+            transform: translateY(-1px);
         }
 
-        .btn-retry {
-            background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
-            color: #e5e7eb;
+        .btn-secondary-outline {
+            background: transparent;
+            color: #9aa0a6;
+            border: 1.5px solid #3c4043 !important;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
         }
 
-        .btn-next {
-            background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
-            color: #e5e7eb;
-        }
-
-        .btn-back {
-            background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
-            color: #e5e7eb;
-        }
-
-        .btn-start-over {
-            background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
-            color: #e5e7eb;
+        .btn-secondary-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #e8eaed;
+            border-color: #5f6368 !important;
         }
 
         /* ==================== SIDEBAR ==================== */
@@ -468,92 +469,6 @@
             font-weight: 600;
             color: var(--accent-blue);
             font-size: 1.05rem;
-        }
-
-        /* ==================== LEADERBOARD ==================== */
-        .leaderboard-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 16px;
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            margin-bottom: 12px;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
-        }
-
-        .leaderboard-item:hover {
-            background: var(--bg-hover);
-            border-color: var(--border-color);
-            transform: translateX(4px);
-        }
-
-        .rank {
-            min-width: 64px;
-            height: 44px;
-            border-radius: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 0.95rem;
-            flex-shrink: 0;
-            padding: 0 8px;
-        }
-
-        .rank-1 {
-            background: var(--gradient-gold);
-            color: #1f2937;
-        }
-
-        .rank-2 {
-            background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
-            color: #1f2937;
-        }
-
-        .rank-3 {
-            background: linear-gradient(135deg, #fdba74 0%, #f97316 100%);
-            color: white;
-        }
-
-        .rank-other {
-            background: var(--bg-panel);
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
-        .leaderboard-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: 2px solid var(--border-color);
-        }
-
-        .leaderboard-info {
-            flex: 1;
-        }
-
-        .leaderboard-name {
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-
-        .leaderboard-stats {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .leaderboard-score {
-            font-size: 1.4rem;
-            font-weight: 800;
-            background: var(--gradient-purple);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-family: 'JetBrains Mono', monospace;
         }
 
         /* ==================== NOTES ==================== */
@@ -1768,9 +1683,6 @@
             <button class="tab active" onclick="switchTab('practice')">
                 <i class="fas fa-book-open"></i> Practice
             </button>
-            <button id="leaderboardTab" class="tab" onclick="switchTab('leaderboard')">
-                <i class="fas fa-trophy"></i> Ranking
-            </button>
             <button id="notesTab" class="tab" onclick="switchTab('notes')">
                 <i class="fas fa-sticky-note"></i> Notes
             </button>
@@ -1800,12 +1712,9 @@
                                 <span class="filter-label">Filter Topic:</span>
                                 <select class="filter-select" id="topicFilter">
                                     <option value="all">All</option>
-                                    <option value="A1 level">A1 level</option>
-                                    <option value="A2 level">A2 level</option>
-                                    <option value="B1 level">B1 level</option>
-                                    <option value="B2 level">B2 level</option>
-                                    <option value="C1 level">C1 level</option>
-                                    <option value="C2 level">C2 level</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
                                 </select>
                             </div>
                         </div>
@@ -1837,29 +1746,29 @@
                         placeholder="Enter your English translation here... (Only highlighted sentence)" disabled
                         style="display: none;"></textarea>
 
-                    <div class="controls" id="practiceControls" style="display: none;">
-                        <button id="btnPrevious" class="btn-check"
-                            style="background: var(--bg-secondary); color: var(--text-primary); display:none;"
+                    <div class="controls" id="practiceControls" style="display: none; gap: 16px;">
+                        <button id="btnPrevious" class="btn-secondary-outline" style="display:none;"
                             onclick="previousSentence()">
                             <i class="fas fa-arrow-left"></i> Previous
                         </button>
                         <button id="btnCheck" class="btn-check" onclick="checkCurrentSentence()" style="display:none;">
-                            <i class="fas fa-check-circle"></i> Check Answer
+                            Check
                         </button>
-                        <button id="btnBack" class="btn-check btn-back" style="display:none;"
+                        <button id="btnBack" class="btn-secondary-outline" style="display:none;"
                             onclick="previousSentence()">
-                            <i class="fas fa-arrow-left"></i> Back
+                            Back
                         </button>
-                        <button id="btnStartOver" class="btn-check btn-start-over" style="display:none;"
+                        <button id="btnStartOver" class="btn-secondary-outline" style="display:none;"
                             onclick="startOver()">
-                            <i class="fas fa-undo"></i> Start Over
+                            Start Over
                         </button>
-                        <button id="btnRetry" class="btn-check btn-retry" onclick="retrySentence()"
+                        <button id="btnRetry" class="btn-secondary-outline" onclick="retrySentence()"
                             style="display:none;">
-                            <i class="fas fa-redo"></i> Retry
+                            Retry
                         </button>
-                        <button id="btnNext" class="btn-check btn-next" onclick="nextSentence()" style="display:none;">
-                            <i class="fas fa-arrow-right"></i> Continue
+                        <button id="btnNext" class="btn-secondary-outline" onclick="nextSentence()"
+                            style="display:none;">
+                            Next
                         </button>
                     </div>
 
@@ -1893,16 +1802,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- LEADERBOARD TAB -->
-        <div id="leaderboardContent" style="display: none;">
-            <div class="panel fade-in-up">
-                <div class="panel-title">
-                    <i class="fas fa-trophy"></i>
-                </div>
-                <div id="leaderboardList"></div>
             </div>
         </div>
 
@@ -1996,6 +1895,14 @@
 
     <script type="module">
         import { LESSON_DATABASE } from './data.js';
+        import { NOTES_DATABASE } from './notes_data.js';
+
+        let userNotes = JSON.parse(localStorage.getItem('user_notes')) || [...NOTES_DATABASE];
+
+        // Ensure changes are persisted
+        const persistNotes = () => {
+            localStorage.setItem('user_notes', JSON.stringify(userNotes));
+        };
 
         let storyData = [];
         let currentIndex = 0;
@@ -2014,14 +1921,10 @@
             event.target.classList.add('active');
 
             document.getElementById('practiceTab').style.display = 'none';
-            document.getElementById('leaderboardContent').style.display = 'none';
             document.getElementById('notesContent').style.display = 'none';
 
             if (tab === 'practice') {
                 document.getElementById('practiceTab').style.display = 'grid';
-            } else if (tab === 'leaderboard') {
-                document.getElementById('leaderboardContent').style.display = 'block';
-                await loadLeaderboard();
             } else if (tab === 'notes') {
                 document.getElementById('notesContent').style.display = 'block';
                 await loadNotesList();
@@ -2029,31 +1932,37 @@
         };
 
         // ============================================
-        // LEADERBOARD
-        // ============================================
-        async function loadLeaderboard() {
-            const container = document.getElementById('leaderboardList');
-            container.innerHTML = `
-                <div class="empty-state">
-                    <i class="fas fa-trophy"></i>
-                    <h3>No Data Yet</h3>
-                    <p>Feature disabled</p>
-                </div>
-            `;
-        }
-
-        // ============================================
         // NOTES
         // ============================================
         async function loadNotesList() {
             const container = document.getElementById('notesList');
-            container.innerHTML = `
-                <div class="empty-state">
-                    <i class="fas fa-sticky-note"></i>
-                    <h3>Chưa có ghi chú nào</h3>
-                    <p>Feature disabled</p>
-                </div>
-            `;
+
+            if (userNotes.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-sticky-note"></i>
+                        <h3>Chưa có ghi chú nào</h3>
+                        <p>Bấm '+' để tạo ghi chú đầu tiên của bạn</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = userNotes.map(note => `
+                    <div class="leaderboard-item" style="cursor: pointer; margin-bottom: 12px; position: relative;" onclick="editNote('${note.id}')">
+                        <div class="rank rank-other" style="min-width: 40px; height: 40px;">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="leaderboard-info">
+                            <div class="leaderboard-name">${note.title}</div>
+                            <div class="leaderboard-stats">${new Date(note.updatedAt).toLocaleDateString()}</div>
+                        </div>
+                        <button onclick="event.stopPropagation(); deleteNotePrompt('${note.id}')" 
+                                style="background: transparent; border: none; color: var(--error-color); cursor: pointer; padding: 8px;">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+
             document.getElementById('notesListView').style.display = 'block';
             document.getElementById('notesEditorView').style.display = 'none';
         }
@@ -2062,7 +1971,7 @@
             currentNoteId = null;
             document.getElementById('noteTitle').value = '';
             document.getElementById('notesTextarea').value = '';
-            document.getElementById('editorTitle').textContent = 'New Note';
+            document.getElementById('editorTitle').textContent = 'Ghi chú mới';
 
             document.getElementById('notesListView').style.display = 'none';
             document.getElementById('notesEditorView').style.display = 'block';
@@ -2070,28 +1979,63 @@
             updateCharCount();
         };
 
-        window.editNote = async (noteId) => {
-            // Feature disabled
+        window.editNote = (noteId) => {
+            const note = userNotes.find(n => n.id === noteId);
+            if (!note) return;
+
+            currentNoteId = noteId;
+            document.getElementById('noteTitle').value = note.title;
+            document.getElementById('notesTextarea').value = note.content;
+            document.getElementById('editorTitle').textContent = 'Sửa ghi chú';
+
+            document.getElementById('notesListView').style.display = 'none';
+            document.getElementById('notesEditorView').style.display = 'block';
+
+            updateCharCount();
         };
 
         window.saveNote = async () => {
-            alert('⚠️ Feature disabled');
+            const title = document.getElementById('noteTitle').value.trim();
+            const content = document.getElementById('notesTextarea').value.trim();
+
+            if (!title || !content) {
+                alert('Vui lòng nhập cả tiêu đề và nội dung!');
+                return;
+            }
+
+            if (currentNoteId) {
+                // Update
+                const index = userNotes.findIndex(n => n.id === currentNoteId);
+                if (index !== -1) {
+                    userNotes[index] = {
+                        ...userNotes[index],
+                        title,
+                        content,
+                        updatedAt: new Date().toISOString()
+                    };
+                }
+            } else {
+                // Create
+                const newNote = {
+                    id: 'note-' + Date.now(),
+                    title,
+                    content,
+                    updatedAt: new Date().toISOString()
+                };
+                userNotes.unshift(newNote);
+            }
+
+            persistNotes();
+            loadNotesList();
         };
 
         window.backToNotesList = () => {
             loadNotesList();
         };
 
-        window.toggleNoteMenu = (event, noteId) => {
-            // Feature disabled
-        };
-
-        function closeAllNoteMenus(event) {
-            // Feature disabled
-        }
-
         window.deleteNotePrompt = (noteId) => {
-            // Feature disabled
+            noteToDelete = noteId;
+            document.getElementById('confirmModal').style.display = 'flex';
         };
 
         window.closeConfirmModal = () => {
@@ -2100,7 +2044,12 @@
         };
 
         window.confirmDeleteNote = async () => {
-            // Feature disabled
+            if (noteToDelete) {
+                userNotes = userNotes.filter(n => n.id !== noteToDelete);
+                persistNotes();
+                loadNotesList();
+                closeConfirmModal();
+            }
         };
 
         function updateCharCount() {
@@ -2369,10 +2318,16 @@
 
             const phrasesHTML = phraseBreakdowns.map(item => {
                 return `
-                    <div style="padding: 12px 0; border-bottom: 1px solid var(--border-color);">
+                    <div style="padding: 12px 0; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between;">
                         <div style="font-weight: 500; font-size: 1rem;">
                             <span style="color: #34d399; font-weight: 600;">${item.phrase}</span><span style="color: var(--text-secondary);">:</span> <span style="color: #c4b5fd;">${item.meaning}</span>
                         </div>
+                        <button onclick="speakPhrase('${item.phrase.replace(/'/g, "\\'")}')" 
+                                style="background: var(--bg-hover); border: none; color: var(--text-highlight); padding: 8px; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;"
+                                onmouseover="this.style.transform='scale(1.1)'; this.style.background='#2a2f3e'"
+                                onmouseout="this.style.transform='scale(1)'; this.style.background='var(--bg-hover)'">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
                     </div>
                 `;
             }).join('');
@@ -2386,13 +2341,19 @@
                         <div style="color: #34d399; font-weight: bold; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
                             <i class="fas fa-check-circle"></i> Correct!
                         </div>
-                        <div style="background: var(--bg-secondary); padding: 20px; border-radius: 12px; margin-bottom: 16px; border: 2px solid #34d399;">
+                        <div style="background: var(--bg-secondary); padding: 20px; border-radius: 12px; margin-bottom: 16px; border: 2px solid #34d399; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
                             <div style="color: #34d399; font-size: 1.2rem; font-weight: 600;">
                                 ${currentData.en_best}
                             </div>
+                            <button onclick="speakPhrase('${currentData.en_best.replace(/'/g, "\\'")}')" 
+                                    style="background: #34d399; border: none; color: #0a0e1a; padding: 10px; border-radius: 50%; width: 44px; height: 44px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0;"
+                                    onmouseover="this.style.transform='scale(1.1)'; this.style.filter='brightness(1.1)'"
+                                    onmouseout="this.style.transform='scale(1)'; this.style.filter='none'">
+                                <i class="fas fa-volume-up" style="font-size: 1.2rem;"></i>
+                            </button>
                         </div>
                         <div style="color: var(--text-highlight); font-weight: bold; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
-                            <i class="fas fa-book"></i> Vocabulary:
+                            <i class="fas fa-book"></i> Học theo từng cụm từ (phrases):
                         </div>
                         <div style="background: var(--bg-secondary); padding: 20px; border-radius: 12px;">
                             ${phrasesHTML}
@@ -2412,12 +2373,20 @@
                                 ${userAnswer || '(empty)'}
                             </div>
                             <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 8px;">Correct answer:</div>
-                            <div style="color: #34d399; font-size: 1.1rem; font-weight: 600;">
-                                ${currentData.en_best}
+                            <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+                                <div style="color: #34d399; font-size: 1.1rem; font-weight: 600;">
+                                    ${currentData.en_best}
+                                </div>
+                                <button onclick="speakPhrase('${currentData.en_best.replace(/'/g, "\\'")}')" 
+                                        style="background: #34d399; border: none; color: #0a0e1a; padding: 10px; border-radius: 50%; width: 44px; height: 44px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0;"
+                                        onmouseover="this.style.transform='scale(1.1)'; this.style.filter='brightness(1.1)'"
+                                        onmouseout="this.style.transform='scale(1)'; this.style.filter='none'">
+                                    <i class="fas fa-volume-up" style="font-size: 1.1rem;"></i>
+                                </button>
                             </div>
                         </div>
                         <div style="color: var(--text-highlight); font-weight: bold; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
-                            <i class="fas fa-book"></i> Vocabulary:
+                            <i class="fas fa-book"></i> Học theo từng cụm từ (phrases):
                         </div>
                         <div style="background: var(--bg-secondary); padding: 20px; border-radius: 12px;">
                             ${phrasesHTML}
@@ -2443,22 +2412,23 @@
             document.getElementById('userInput').disabled = true;
         };
 
-        // Text-to-Speech function for phrases
+        // Text-to-Speech function for phrases (Using edge-tts backend)
         window.speakPhrase = (phrase) => {
             const cleanPhrase = phrase.trim();
-            const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(cleanPhrase)}&tl=en&client=tw-ob`;
+            if (!cleanPhrase) return;
 
-            const audio = document.createElement('audio');
-            audio.src = url;
-            audio.setAttribute('preload', 'auto');
-            audio.setAttribute('crossorigin', 'anonymous');
-
-            // Play khi sẵn sàng
-            audio.addEventListener('canplaythrough', () => {
-                audio.play().catch(e => console.error("Lỗi phát:", e));
-            }, { once: true });
-
-            audio.load();
+            // Gọi đến API Python (đang chạy ở localhost:5000)
+            const url = `http://localhost:5000/speak?text=${encodeURIComponent(cleanPhrase)}`;
+            
+            // Xử lý âm thanh
+            const audio = new Audio(url);
+            audio.play().catch(e => {
+                console.error("Lỗi phát âm thanh (Có thể server.py chưa chạy):", e);
+                // Fallback về giọng mặc định trình duyệt nếu server lỗi hoặc chưa bật
+                const utterance = new SpeechSynthesisUtterance(cleanPhrase);
+                utterance.lang = 'en-US';
+                window.speechSynthesis.speak(utterance);
+            });
         };
 
         window.retrySentence = () => {
@@ -2498,15 +2468,8 @@
                 currentIndex++;
                 renderStoryUI();
             } else {
-                currentIndex++;
-                renderStoryUI();
+                alert("🎉 CONGRATULATIONS!");
                 document.getElementById('progressFill').style.width = '100%';
-
-                // Disable input and hide check button
-                const userInput = document.getElementById('userInput');
-                userInput.disabled = true;
-                userInput.placeholder = "🎉 Lesson Completed!";
-                document.getElementById('btnCheck').style.display = 'none';
             }
         };
 
